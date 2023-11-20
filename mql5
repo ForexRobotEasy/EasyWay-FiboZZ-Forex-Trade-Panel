@@ -1,0 +1,119 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                            EasyWay FiboZZ Forex Trade Panel|
+//|                                                   forexroboteasy.com|
+//|                                           Developed by Forex Robot Easy Team|
+//+------------------------------------------------------------------+
+
+// Include necessary libraries
+#include <Trade\Trade.mqh>
+#include <ChartObjects\ChartObjects.mqh>
+#include <MovingAverages\MovingAverages.mqh>
+
+// Define constants
+#define MAX_TARGET_LEVELS 3
+#define PANEL_WIDTH 300
+#define PANEL_HEIGHT 500
+
+// Declare global variables
+CTrade trade;
+CChartObjectLabel info_label;
+CChartObjectLabel profit_label;
+CChartObjectLabel balance_label;
+CChartObjectLabel lot_size_label;
+CChartObjectLabel positions_label;
+CChartObjectLabel margin_label;
+CChartObjectLabel equity_label;
+CChartObjectLabel pnl_label;
+
+//+------------------------------------------------------------------+
+//| Custom indicator functions                                        |
+//+------------------------------------------------------------------+
+
+// Function to draw ZigZag Extreme Arrows
+void DrawZigZagArrows()
+{
+    // Implementation of ZigZag Extreme Arrows drawing logic
+}
+
+// Function to draw Daily Fibonacci Extension levels
+void DrawFibonacciLevels()
+{
+    // Implementation of Daily Fibonacci Extension levels drawing logic
+}
+
+//+------------------------------------------------------------------+
+//| Initialization function                                          |
+//+------------------------------------------------------------------+
+void OnInit()
+{
+    // Create trade panel
+    if (!trade.CreatePanel('EasyWay FiboZZ Trade Panel', PANEL_WIDTH, PANEL_HEIGHT))
+    {
+        Print('Failed to create trade panel!');
+        return;
+    }
+
+    // Add account information panel
+    trade.AddPanelElement(ACCOUNT_PANEL);
+
+    // Draw ZigZag Extreme Arrows and Daily Fibonacci Extension levels
+    DrawZigZagArrows();
+    DrawFibonacciLevels();
+
+    // Add customization options for different trading strategies
+    trade.AddPanelElement(CUSTOMIZATION_OPTIONS);
+
+    // Add custom indicators for trading strategies
+    trade.AddPanelElement(INDICATORS);
+
+    // Display important data
+    info_label = trade.CreateLabel('Trading Information:', 10, 10);
+    profit_label = trade.CreateLabel('Today's Profit: ', 10, 30);
+    balance_label = trade.CreateLabel('Account Balance: ', 10, 50);
+    lot_size_label = trade.CreateLabel('Last Open Lot Size: ', 10, 70);
+    positions_label = trade.CreateLabel('Open Positions: ', 10, 90);
+    margin_label = trade.CreateLabel('Free Margin Level: ', 10, 110);
+    equity_label = trade.CreateLabel('Account Equity: ', 10, 130);
+    pnl_label = trade.CreateLabel('24-hour P/L: ', 10, 150);
+}
+
+//+------------------------------------------------------------------+
+//| Deinitialization function                                        |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+    // Remove trade panel elements
+    trade.RemovePanelElement(ACCOUNT_PANEL);
+    trade.RemovePanelElement(CUSTOMIZATION_OPTIONS);
+    trade.RemovePanelElement(INDICATORS);
+
+    // Delete labels
+    trade.DeleteObject(info_label);
+    trade.DeleteObject(profit_label);
+    trade.DeleteObject(balance_label);
+    trade.DeleteObject(lot_size_label);
+    trade.DeleteObject(positions_label);
+    trade.DeleteObject(margin_label);
+    trade.DeleteObject(equity_label);
+    trade.DeleteObject(pnl_label);
+}
+
+//+------------------------------------------------------------------+
+//| Main execution function                                          |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+    // Execute trading algorithm
+    // ...
+}
+
+//+------------------------------------------------------------------+
+//| Logical conclusion                                               |
+//+------------------------------------------------------------------+
+void Conclusion()
+{
+    // Display trade panel and execute trading algorithm
+    trade.DisplayPanel();
+    OnTick();
+}
